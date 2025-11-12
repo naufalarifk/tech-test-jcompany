@@ -2,57 +2,20 @@
 
 import Link from "next/link";
 import { PageLayout, StatCard, Badge, Button } from "@/app/components";
-
+import { useUsers } from "@/lib/hooks/useUsers";
 export default function User() {
-  const users = [
-    {
-      id: 1,
-      name: "Alice Johnson",
-      email: "alice@example.com",
-      role: "Admin",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Bob Smith",
-      email: "bob@example.com",
-      role: "Editor",
-      status: "Active",
-    },
-    {
-      id: 3,
-      name: "Carol Williams",
-      email: "carol@example.com",
-      role: "Viewer",
-      status: "Inactive",
-    },
-    {
-      id: 4,
-      name: "David Brown",
-      email: "david@example.com",
-      role: "Editor",
-      status: "Active",
-    },
-    {
-      id: 5,
-      name: "Emma Davis",
-      email: "emma@example.com",
-      role: "Admin",
-      status: "Active",
-    },
-    {
-      id: 6,
-      name: "Frank Miller",
-      email: "frank@example.com",
-      role: "Viewer",
-      status: "Inactive",
-    },
-  ];
+  const { data: users = [], isLoading, error } = useUsers();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error loading users.</div>;
+  }
 
   return (
     <PageLayout title="User Portal">
-      {/* Header Section */}
-      <section className="mb-8">
+      {/* <section className="mb-8">
         <div className="flex justify-between items-center">
           <div>
             <h2 className="text-3xl font-bold text-black dark:text-white mb-2">
@@ -65,8 +28,6 @@ export default function User() {
           <Button variant="primary">Add User</Button>
         </div>
       </section>
-
-      {/* Users Table */}
       <section className="bg-white dark:bg-neutral-900 rounded-lg shadow-card overflow-hidden border border-gray-200 dark:border-gray-800 mb-8">
         <div className="overflow-x-auto">
           <table className="w-full">
@@ -132,7 +93,6 @@ export default function User() {
         </div>
       </section>
 
-      {/* Stats Footer */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatCard label="Total Users" value={users.length.toString()} />
         <StatCard
@@ -143,7 +103,17 @@ export default function User() {
           label="Admin Users"
           value={users.filter((u) => u.role === "Admin").length.toString()}
         />
-      </section>
+      </section> */}
+      <div className="grid gap-4">
+        {users.map((user) => (
+          <div key={user.id} className="p-4 border rounded">
+            <h3 className="font-semibold">{user.name}</h3>
+            <p className="text-sm text-gray-600">{user.email}</p>
+            <p className="text-sm text-gray-600">{user.company.name}</p>
+            <p className="text-sm text-gray-600">{user.id}</p>
+          </div>
+        ))}
+      </div>
     </PageLayout>
   );
 }
