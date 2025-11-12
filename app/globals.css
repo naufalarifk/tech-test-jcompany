@@ -2,25 +2,77 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
+  --border: #e5e7eb;
+  --hover: #f3f4f6;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+  --border: #404040;
+  --hover: #1a1a1a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: inherit;
+  color: inherit;
+}
+
+/* Override color utilities for light/dark theme */
+@layer components {
+  .bg-card {
+    @apply bg-white dark:bg-neutral-900;
+  }
+
+  .bg-secondary {
+    @apply bg-gray-50 dark:bg-neutral-950;
+  }
+
+  .text-primary {
+    @apply text-black dark:text-white;
+  }
+
+  .text-secondary {
+    @apply text-gray-600 dark:text-gray-400;
+  }
+
+  .text-tertiary {
+    @apply text-gray-500 dark:text-gray-500;
+  }
+
+  .border-base {
+    @apply border-gray-200 dark:border-gray-800;
+  }
+
+  .bg-hover {
+    @apply hover:bg-gray-50 dark:hover:bg-neutral-800;
+  }
+
+  .shadow-card {
+    @apply shadow dark:shadow-lg dark:shadow-black/50;
+  }
+
+  .button-primary {
+    @apply bg-black hover:bg-gray-900 text-white dark:bg-white dark:text-black dark:hover:bg-gray-100 font-bold py-2 px-6 rounded-lg transition duration-200;
+  }
+
+  .button-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 text-black dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 font-bold py-2 px-6 rounded-lg transition duration-200;
+  }
+
+  .button-danger {
+    @apply text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white font-medium;
+  }
+
+  .badge-base {
+    @apply inline-flex px-3 py-1 text-xs font-medium rounded-full bg-gray-200 text-gray-900 dark:bg-neutral-800 dark:text-gray-100;
+  }
 }
