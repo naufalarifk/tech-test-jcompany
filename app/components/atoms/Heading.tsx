@@ -11,7 +11,7 @@ export function Heading({
   className = "",
   ...props
 }: HeadingProps) {
-  const baseStyles = "text-black dark:text-white font-bold";
+  const baseStyles = "text-primary font-bold";
 
   const sizes = {
     1: "text-4xl",

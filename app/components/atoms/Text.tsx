@@ -12,9 +12,9 @@ export function Text({
   ...props
 }: TextProps) {
   const variants = {
-    primary: "text-black dark:text-white",
-    secondary: "text-gray-600 dark:text-gray-400",
-    tertiary: "text-gray-500 dark:text-gray-500",
+    primary: "text-primary",
+    secondary: "text-secondary",
+    tertiary: "text-tertiary",
   };
 
   return (

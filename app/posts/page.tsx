@@ -2,10 +2,21 @@
 
 import { useSearchParams } from "next/navigation";
 import { PageLayout, PostList, Badge, Button } from "@/app/components";
+import { useUserStore } from "@/store/useUserStore";
+import { useEffect } from "react";
 
 export default function Posts() {
   const searchParams = useSearchParams();
   const userId = searchParams.get("userId");
+
+  const { posts, fetchPosts, loadingFetchPost, errorFetchPost } =
+    useUserStore();
+
+  useEffect(() => {
+    if (userId !== null) {
+      fetchPosts(userId);
+    }
+  }, [fetchPosts, userId]);
 
   const users = [
     { id: 1, name: "Alice Johnson", email: "alice@example.com", role: "Admin" },
@@ -142,11 +153,11 @@ export default function Posts() {
   if (userId && !currentUser) {
     return (
       <PageLayout title="Posts">
-        <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-8 text-center border border-gray-200 dark:border-gray-800">
-          <h2 className="text-2xl font-bold text-black dark:text-white mb-4">
+        <div className="bg-card rounded-lg shadow-lg p-8 text-center border border-primary">
+          <h2 className="text-2xl font-bold text-primary mb-4">
             User Not Found
           </h2>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-secondary">
             The user with ID {userId} does not exist.
           </p>
           <a href="/users" className="mt-6 inline-block">
@@ -161,22 +172,20 @@ export default function Posts() {
     <PageLayout title="Posts">
       {/* User Info Card - only show if userId is provided */}
       {currentUser && (
-        <section className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-8 mb-8 border border-gray-200 dark:border-gray-800">
+        <section className="bg-card rounded-lg shadow-lg p-8 mb-8 border border-primary">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-3xl font-bold text-black dark:text-white mb-2">
-                {currentUser.name}
+              <h2 className="text-3xl font-bold text-primary mb-2">
+                {users[Number(userId!)].name}
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-1">
-                {currentUser.email}
-              </p>
+              <p className="text-secondary mb-1">{currentUser.email}</p>
               <Badge variant="default">{currentUser.role}</Badge>
             </div>
             <div className="text-right">
-              <p className="text-4xl font-bold text-black dark:text-white">
+              <p className="text-4xl font-bold text-primary">
                 {userPosts.length}
               </p>
-              <p className="text-gray-600 dark:text-gray-400">Posts</p>
+              <p className="text-secondary">Posts</p>
             </div>
           </div>
         </section>
@@ -185,10 +194,10 @@ export default function Posts() {
       {/* Page Title */}
       {!currentUser && (
         <section className="mb-8">
-          <h2 className="text-3xl font-bold text-black dark:text-white mb-2">
+          <h2 className="text-3xl font-bold text-primary mb-2">
             Please select a user
           </h2>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-secondary">
             Use the userId query parameter to view posts. Example: ?userId=1
           </p>
         </section>
@@ -196,17 +205,15 @@ export default function Posts() {
 
       {/* Posts List */}
       {displayPosts.length > 0 ? (
-        <PostList posts={displayPosts} />
+        <PostList posts={posts} />
       ) : currentUser ? (
-        <section className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-8 text-center border border-gray-200 dark:border-gray-800">
-          <p className="text-gray-600 dark:text-gray-400 text-lg mb-4">
-            No posts yet
-          </p>
+        <section className="bg-card rounded-lg shadow-lg p-8 text-center border border-primary">
+          <p className="text-secondary text-lg mb-4">No posts yet</p>
           <Button variant="primary">Create First Post</Button>
         </section>
       ) : (
-        <section className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-8 text-center border border-gray-200 dark:border-gray-800">
-          <p className="text-gray-600 dark:text-gray-400 text-lg">
+        <section className="bg-card rounded-lg shadow-lg p-8 text-center border border-primary">
+          <p className="text-secondary text-lg">
             Select a user from the list to view their posts
           </p>
           <a href="/users" className="mt-6 inline-block">
@@ -217,10 +224,7 @@ export default function Posts() {
 
       {/* Back Button */}
       <div className="py-6">
-        <a
-          href="/users"
-          className="inline-flex items-center text-black hover:text-gray-700 dark:text-white dark:hover:text-gray-300 font-medium transition duration-200"
-        >
+        <a href="/users" className="link-primary">
           ← Back to Users
         </a>
       </div>

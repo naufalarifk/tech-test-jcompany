@@ -1,13 +1,5 @@
-import React from "react";
-import { PostCard } from "../molecules/PostCard";
-
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-  date: string;
-  likes: number;
-}
+import { Post } from "@/types/user";
+import { PostCard } from "@/app/components";
 
 interface PostListProps {
   posts: Post[];
@@ -20,28 +12,19 @@ export function PostList({
   onLike,
   emptyMessage = "No posts found",
 }: PostListProps) {
-  if (posts.length === 0) {
+  if (!posts?.length) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600 dark:text-gray-400 text-lg">
-          {emptyMessage}
-        </p>
+        <p className="text-secondary text-lg">{emptyMessage}</p>
       </div>
     );
   }
+  console.log("posts.length", posts.length);
 
   return (
     <div className="space-y-6">
-      {posts.map((post) => (
-        <PostCard
-          key={post.id}
-          id={post.id}
-          title={post.title}
-          content={post.content}
-          date={post.date}
-          likes={post.likes}
-          onLike={() => onLike?.(post.id)}
-        />
+      {posts.map((post, id) => (
+        <PostCard key={id} post={post} onLike={() => onLike?.(id)} />
       ))}
     </div>
   );

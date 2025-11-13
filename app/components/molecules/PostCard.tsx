@@ -1,62 +1,52 @@
 import React from "react";
 import { Heading } from "../atoms/Heading";
 import { Text } from "../atoms/Text";
+import { Post } from "@/types/user";
 
 interface PostCardProps {
-  id: number;
-  title: string;
-  content: string;
-  date: string;
-  likes: number;
+  post: Post;
   onLike?: () => void;
   onReadMore?: () => void;
 }
 
 export function PostCard({
-  id,
-  title,
-  content,
-  date,
-  likes,
-  onLike,
-  onReadMore,
-}: PostCardProps) {
+  post,
+}: // onLike,
+// onReadMore,
+PostCardProps) {
+  const { body, id, title, userId } = post;
+
   return (
-    <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-md hover:shadow-lg transition duration-300 p-6 border border-gray-200 dark:border-gray-800 border-l-4 border-l-black dark:border-l-white">
+    <div className="bg-card rounded-lg shadow-card p-6 border border-primary border-l-4 border-l-primary hover:shadow-lg transition duration-300">
       <div className="flex justify-between items-start mb-2">
         <Heading level={3} className="text-xl flex-1 mb-0">
           {title}
         </Heading>
         <Text variant="tertiary" className="text-sm ml-4 mb-0">
-          {date}
+          {userId}
         </Text>
       </div>
       <Text variant="secondary" className="mb-4">
-        {content}
+        {body}
       </Text>
       <div className="flex items-center justify-between">
         <Text variant="tertiary" className="text-sm mb-0">
           Post ID: {id}
         </Text>
-        <div className="flex items-center space-x-4">
+        {/* <div className="flex items-center space-x-4">
           {onLike && (
             <button
               onClick={onLike}
-              className="flex items-center space-x-1 text-black hover:text-gray-700 dark:text-white dark:hover:text-gray-300 font-medium transition duration-200"
+              className="flex items-center space-x-1 text-primary hover:text-secondary font-medium transition duration-200"
             >
-              <span>❤️</span>
-              <span>{likes}</span>
             </button>
           )}
           {onReadMore && (
-            <button
-              onClick={onReadMore}
-              className="text-black hover:text-gray-700 dark:text-white dark:hover:text-gray-300 font-medium transition duration-200"
-            >
+            <button onClick={onReadMore} className="link-primary">
               Read More
             </button>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

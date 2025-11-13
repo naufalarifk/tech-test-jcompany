@@ -1,29 +1,98 @@
 @import "tailwindcss";
 
+/* Light Mode (Default) */
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
-  --border: #e5e7eb;
-  --hover: #f3f4f6;
+  /* Backgrounds */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f3f4f6;
+  --color-bg-tertiary: #e5e7eb;
+  --color-bg-card: #ffffff;
+  --color-bg-header: #ffffff;
+  --color-bg-footer: #000000;
+  --color-bg-hover: #f3f4f6;
+
+  /* Text Colors */
+  --color-text-primary: #000000;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #999999;
+  --color-text-inverse: #ffffff;
+
+  /* Borders */
+  --color-border-primary: #e5e7eb;
+  --color-border-secondary: #d1d5db;
+
+  /* Buttons */
+  --color-button-primary-bg: #000000;
+  --color-button-primary-hover: #333333;
+  --color-button-primary-text: #ffffff;
+  --color-button-secondary-bg: #e5e7eb;
+  --color-button-secondary-hover: #d1d5db;
+  --color-button-secondary-text: #000000;
+  --color-button-danger-text: #666666;
+  --color-button-danger-hover: #000000;
+
+  /* Badges */
+  --color-badge-default-bg: #e5e7eb;
+  --color-badge-default-text: #1a1a1a;
+  --color-badge-success-bg: #e5e7eb;
+  --color-badge-success-text: #000000;
+  --color-badge-inactive-bg: #d1d5db;
+  --color-badge-inactive-text: #666666;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 }
 
+/* Dark Mode */
 html.dark {
-  --background: #000000;
-  --foreground: #ffffff;
-  --border: #404040;
-  --hover: #1a1a1a;
-}
+  /* Backgrounds */
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #0a0a0a;
+  --color-bg-tertiary: #1a1a1a;
+  --color-bg-card: #111111;
+  --color-bg-header: #111111;
+  --color-bg-footer: #0a0a0a;
+  --color-bg-hover: #1a1a1a;
 
-[data-theme="dark"] {
-  --background: #000000;
-  --foreground: #ffffff;
-  --border: #404040;
-  --hover: #1a1a1a;
+  /* Text Colors */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #999999;
+  --color-text-tertiary: #666666;
+  --color-text-inverse: #000000;
+
+  /* Borders */
+  --color-border-primary: #333333;
+  --color-border-secondary: #1a1a1a;
+
+  /* Buttons */
+  --color-button-primary-bg: #ffffff;
+  --color-button-primary-hover: #e5e7eb;
+  --color-button-primary-text: #000000;
+  --color-button-secondary-bg: #262626;
+  --color-button-secondary-hover: #404040;
+  --color-button-secondary-text: #ffffff;
+  --color-button-danger-text: #999999;
+  --color-button-danger-hover: #ffffff;
+
+  /* Badges */
+  --color-badge-default-bg: #262626;
+  --color-badge-default-text: #e5e7eb;
+  --color-badge-success-bg: #262626;
+  --color-badge-success-text: #ffffff;
+  --color-badge-inactive-bg: #404040;
+  --color-badge-inactive-text: #999999;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
 }
 
 html {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
   font-family: system-ui, -apple-system, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -33,53 +102,163 @@ body {
   color: inherit;
 }
 
-/* Override color utilities for light/dark theme */
+/* Component Utilities using CSS Variables */
 @layer components {
-  .bg-card {
-    @apply bg-white dark:bg-neutral-900;
+  /* Backgrounds */
+  .bg-primary {
+    background-color: var(--color-bg-primary);
   }
 
   .bg-secondary {
-    @apply bg-gray-50 dark:bg-neutral-950;
+    background-color: var(--color-bg-secondary);
   }
 
-  .text-primary {
-    @apply text-black dark:text-white;
+  .bg-card {
+    background-color: var(--color-bg-card);
+    border-color: var(--color-border-primary);
   }
 
-  .text-secondary {
-    @apply text-gray-600 dark:text-gray-400;
+  .bg-header {
+    background-color: var(--color-bg-header);
+    border-color: var(--color-border-primary);
   }
 
-  .text-tertiary {
-    @apply text-gray-500 dark:text-gray-500;
-  }
-
-  .border-base {
-    @apply border-gray-200 dark:border-gray-800;
+  .bg-footer {
+    background-color: var(--color-bg-footer);
+    color: var(--color-text-inverse);
   }
 
   .bg-hover {
-    @apply hover:bg-gray-50 dark:hover:bg-neutral-800;
+    background-color: var(--color-bg-hover);
   }
 
+  /* Text Colors */
+  .text-primary {
+    color: var(--color-text-primary);
+  }
+
+  .text-secondary {
+    color: var(--color-text-secondary);
+  }
+
+  .text-tertiary {
+    color: var(--color-text-tertiary);
+  }
+
+  /* Borders */
+  .border-primary {
+    border-color: var(--color-border-primary);
+  }
+
+  .border-secondary {
+    border-color: var(--color-border-secondary);
+  }
+
+  /* Shadows */
   .shadow-card {
-    @apply shadow dark:shadow-lg dark:shadow-black/50;
+    box-shadow: var(--shadow-md);
   }
 
-  .button-primary {
-    @apply bg-black hover:bg-gray-900 text-white dark:bg-white dark:text-black dark:hover:bg-gray-100 font-bold py-2 px-6 rounded-lg transition duration-200;
+  /* Buttons - Primary */
+  .btn-primary {
+    background-color: var(--color-button-primary-bg);
+    color: var(--color-button-primary-text);
+    font-weight: bold;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
   }
 
-  .button-secondary {
-    @apply bg-gray-200 hover:bg-gray-300 text-black dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 font-bold py-2 px-6 rounded-lg transition duration-200;
+  .btn-primary:hover {
+    background-color: var(--color-button-primary-hover);
   }
 
-  .button-danger {
-    @apply text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white font-medium;
+  /* Buttons - Secondary */
+  .btn-secondary {
+    background-color: var(--color-button-secondary-bg);
+    color: var(--color-button-secondary-text);
+    font-weight: bold;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
   }
 
-  .badge-base {
-    @apply inline-flex px-3 py-1 text-xs font-medium rounded-full bg-gray-200 text-gray-900 dark:bg-neutral-800 dark:text-gray-100;
+  .btn-secondary:hover {
+    background-color: var(--color-button-secondary-hover);
+  }
+
+  /* Buttons - Danger */
+  .btn-danger {
+    color: var(--color-button-danger-text);
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .btn-danger:hover {
+    color: var(--color-button-danger-hover);
+  }
+
+  /* Badges - Default */
+  .badge-default {
+    display: inline-flex;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    background-color: var(--color-badge-default-bg);
+    color: var(--color-badge-default-text);
+  }
+
+  /* Badges - Success */
+  .badge-success {
+    display: inline-flex;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    background-color: var(--color-badge-success-bg);
+    color: var(--color-badge-success-text);
+  }
+
+  /* Badges - Inactive */
+  .badge-inactive {
+    display: inline-flex;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    background-color: var(--color-badge-inactive-bg);
+    color: var(--color-badge-inactive-text);
+  }
+
+  /* Links */
+  .link-primary {
+    color: var(--color-text-primary);
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .link-primary:hover {
+    color: var(--color-text-secondary);
+  }
+
+  /* Table Styles */
+  .table-header {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border-primary);
+    color: var(--color-text-primary);
+  }
+
+  .table-row {
+    border-color: var(--color-border-primary);
+    transition: background-color 0.15s ease;
+  }
+
+  .table-row:hover {
+    background-color: var(--color-bg-hover);
+  }
+
+  .table-cell {
+    color: var(--color-text-primary);
   }
 }

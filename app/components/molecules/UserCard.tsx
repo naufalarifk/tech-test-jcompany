@@ -2,66 +2,39 @@ import React from "react";
 import { Heading } from "../atoms/Heading";
 import { Text } from "../atoms/Text";
 import { Badge } from "../atoms/Badge";
+import { User } from "@/types/user";
+import Link from "next/link";
+import { Button } from "../atoms/Button";
 
 interface UserCardProps {
-  name: string;
-  email: string;
-  role: string;
-  status: "Active" | "Inactive";
+  user: User;
   onEdit?: () => void;
   onDelete?: () => void;
   onViewPosts?: () => void;
 }
 
 export function UserCard({
-  name,
-  email,
-  role,
-  status,
+  user,
   onEdit,
   onDelete,
   onViewPosts,
 }: UserCardProps) {
+  const { name, address, company, email, id, phone, username, website } = user;
   return (
-    <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-md hover:shadow-lg transition p-6 border border-gray-200 dark:border-gray-800">
-      <Heading level={3} className="text-lg mb-2">
-        {name}
-      </Heading>
-      <Text variant="secondary" className="mb-2">
-        {email}
-      </Text>
-      <div className="flex gap-2 mb-4">
-        <Badge variant="default">{role}</Badge>
-        <Badge variant={status === "Active" ? "success" : "inactive"}>
-          {status}
-        </Badge>
-      </div>
-      <div className="flex gap-2">
-        {onViewPosts && (
-          <button
-            onClick={onViewPosts}
-            className="text-black hover:text-gray-700 dark:text-gray-300 dark:hover:text-white font-medium transition duration-200"
-          >
-            Posts
-          </button>
-        )}
-        {onEdit && (
-          <button
-            onClick={onEdit}
-            className="text-black hover:text-gray-700 dark:text-gray-300 dark:hover:text-white font-medium transition duration-200"
-          >
-            Edit
-          </button>
-        )}
-        {onDelete && (
-          <button
-            onClick={onDelete}
-            className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white font-medium transition duration-200"
-          >
-            Delete
-          </button>
-        )}
-      </div>
-    </div>
+    <tr key={id} className="table-row hover:bg-hover transition duration-150">
+      <td className="px-6 py-4 text-sm font-medium text-primary">{name}</td>
+      <td className="px-6 py-4 text-sm text-secondary">{email}</td>
+      <td className="px-6 py-4 text-sm">{address.city}</td>
+      <td className="px-6 py-4 text-sm text-secondary">{company.name}</td>
+      <td className="px-6 py-4 text-sm space-x-2">
+        <Link href={`/posts?userId=${id}`} className="link-primary">
+          Posts
+        </Link>
+        <button className="text-secondary hover:text-primary font-medium transition duration-200">
+          Edit
+        </button>
+        <Button variant="danger">Delete</Button>
+      </td>
+    </tr>
   );
 }
