@@ -1,13 +1,8 @@
 // app/providers.tsx
 "use client";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
-import { useState } from "react";
-
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
     <ThemeProvider
       attribute="class"
@@ -15,7 +10,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       enableColorScheme
     >
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      {children}
     </ThemeProvider>
   );
 }

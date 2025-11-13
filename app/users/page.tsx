@@ -2,17 +2,7 @@
 
 import Link from "next/link";
 import { PageLayout, StatCard, Badge, Button } from "@/app/components";
-import { useUsers } from "@/lib/hooks/useUsers";
 export default function User() {
-  const { data: users = [], isLoading, error } = useUsers();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>Error loading users.</div>;
-  }
-
   return (
     <PageLayout title="User Portal">
       {/* <section className="mb-8">
