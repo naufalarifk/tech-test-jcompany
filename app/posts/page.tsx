@@ -7,8 +7,9 @@ import { Suspense, useEffect } from "react";
 import { Post, User } from "@/types/user";
 import { PageLayout } from "@/app/components/organisms/PageLayout";
 import { PostList } from "@/app/components/organisms/PostList";
-import { Button, Skeleton } from "../components/atoms";
-import { PostCardSkeleton } from "../components/molecules/UserCardSkeleton";
+import { PostCardSkeleton } from "@/app/components/molecules/UserCardSkeleton";
+import { Button } from "@/app/components/atoms/Button";
+import { Skeleton } from "@/app/components/atoms/Skeleton";
 
 type UserPostParams = {
   posts: Post[];

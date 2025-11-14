@@ -1,5 +1,5 @@
 import { Post } from "@/types/user";
-import { PostCard } from "@/app/components";
+import { PostCard } from "@/app/components/molecules/PostCard";
 interface PostListProps {
   posts: Post[];
   emptyMessage?: string;
