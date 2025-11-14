@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { useUserStore } from "@/store/useUserStore";
 import { createUserSchema } from "@/schemas/userSchema";
 import type { User } from "@/types/user";
@@ -45,7 +45,7 @@ export default function CreateUserModal({
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     path: string
   ) => {
     const { value } = e.target;
@@ -74,7 +74,7 @@ export default function CreateUserModal({
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setErrors({});
     setSubmitError(null);
