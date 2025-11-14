@@ -14,7 +14,11 @@ interface EditUserModalProps {
   onClose: () => void;
 }
 
-export function EditUserModal({ isOpen, user, onClose }: EditUserModalProps) {
+export default function EditUserModal({
+  isOpen,
+  user,
+  onClose,
+}: EditUserModalProps) {
   const { updateUser, loadingUpdateUser } = useUserStore();
   const [formData, setFormData] = useState<Omit<User, "id">>({
     name: "",

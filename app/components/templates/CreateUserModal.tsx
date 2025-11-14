@@ -13,7 +13,10 @@ interface CreateUserModalProps {
   onClose: () => void;
 }
 
-export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
+export default function CreateUserModal({
+  isOpen,
+  onClose,
+}: CreateUserModalProps) {
   const { createUser, loadingCreateUser } = useUserStore();
   const [formData, setFormData] = useState<Omit<User, "id">>({
     name: "",
