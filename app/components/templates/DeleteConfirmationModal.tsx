@@ -4,6 +4,7 @@ import { useUserStore } from "@/store/useUserStore";
 import type { User } from "@/types/user";
 import { Button } from "../atoms/Button";
 import { Text } from "../atoms/Text";
+import toast from "react-hot-toast";
 
 interface DeleteConfirmationModalProps {
   isOpen: boolean;
@@ -21,6 +22,7 @@ export function DeleteConfirmationModal({
   const handleConfirm = async () => {
     if (!user) return;
     await deleteUser(user.id);
+    toast.success("User deleted successfully!");
     onClose();
   };
 
@@ -54,7 +56,7 @@ export function DeleteConfirmationModal({
             variant="primary"
             onClick={handleConfirm}
             disabled={loadingDeleteUser}
-            className="bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800"
+            className=" text-white bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800"
           >
             {loadingDeleteUser ? "Deleting..." : "Delete"}
           </Button>

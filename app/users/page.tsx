@@ -5,9 +5,6 @@ import {
   StatCard,
   Button,
   UserCard,
-  CreateUserModal,
-  EditUserModal,
-  DeleteConfirmationModal,
   UserCardSkeleton,
   StatCardSkeleton,
 } from "@/app/components";
@@ -15,6 +12,19 @@ import { useUserStore } from "@/store/useUserStore";
 import { useEffect, useState } from "react";
 import type { User } from "@/types/user";
 import { Toaster } from "react-hot-toast";
+import dynamic from "next/dynamic";
+
+const CreateUserModal = dynamic(
+  () => import("@/app/components/templates/CreateUserModal")
+);
+
+const EditUserModal = dynamic(
+  () => import("@/app/components/templates/EditUserModal")
+);
+
+const DeleteConfirmationModal = dynamic(
+  () => import("@/app/components/templates/EditUserModal")
+);
 
 export default function User() {
   const { users, fetchUsers, loadingFetchUser } = useUserStore();

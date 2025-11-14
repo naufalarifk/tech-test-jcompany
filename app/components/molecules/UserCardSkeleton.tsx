@@ -45,7 +45,7 @@ export function StatCardSkeleton() {
   return (
     <div className="bg-card rounded-lg shadow-card p-6 text-center border border-primary">
       <Skeleton width="80px" height="16px" className="mx-auto mb-2" />
-      <Skeleton width="60px" height="36px" className="mx-auto" />
+      <Skeleton width="64px" height="36px" className="mx-auto" />
     </div>
   );
 }

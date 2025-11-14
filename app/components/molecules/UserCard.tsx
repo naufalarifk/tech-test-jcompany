@@ -22,13 +22,13 @@ export function UserCard({ user, onEdit, onDelete }: UserCardProps) {
         </Link>
         <button
           onClick={() => onEdit?.(user)}
-          className="text-secondary hover:text-primary font-medium transition duration-200"
+          className="text-secondary hover:cursor-pointer hover:text-blue-500 font-medium transition duration-200"
         >
           Edit
         </button>
         <button
           onClick={() => onDelete?.(user)}
-          className="text-secondary hover:text-red-600 dark:hover:text-red-400 font-medium transition duration-200"
+          className="text-secondary hover:cursor-pointer hover:text-red-600 dark:hover:text-red-400 font-medium transition duration-200"
         >
           Delete
         </button>
