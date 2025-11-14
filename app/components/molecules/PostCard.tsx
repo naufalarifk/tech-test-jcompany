@@ -5,7 +5,6 @@ import { Post } from "@/types/user";
 
 interface PostCardProps {
   post: Post;
-  onLike?: () => void;
   onReadMore?: () => void;
 }
 

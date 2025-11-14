@@ -11,6 +11,11 @@ interface UserState {
   loadingUpdateUser: boolean;
   loadingDeleteUser: boolean;
   loadingFetchPost: boolean;
+  successFetchUser: boolean;
+  successCreateUser: boolean;
+  successUpdateUser: boolean;
+  successDeleteUser: boolean;
+  successFetchPost: boolean;
   errorFetchUser : string | null;
   errorCreateUser : string | null;
   errorUpdateUser : string | null;
@@ -37,6 +42,11 @@ devtools((set) => ({
     loadingUpdateUser: false,
     loadingDeleteUser: false,
     loadingFetchPost: false,
+    successFetchUser: false,
+    successCreateUser: false,
+    successUpdateUser: false,
+    successDeleteUser: false,
+    successFetchPost: false,
     errorFetchUser: null,
     errorCreateUser: null,
     errorUpdateUser: null,
@@ -47,7 +57,7 @@ fetchUsers: async () => {
     set({ loadingFetchUser: true, errorFetchUser: null });
     try {
       const { data } = await axios.get<User[]>(BASE_URL + '/users');
-      set({ users: data, loadingFetchUser: false });
+      set({ users: data, loadingFetchUser: false, successFetchUser: true });
     } catch (err: Error | unknown) {
       set({ errorFetchUser: (err as Error).message || 'Failed to fetch users', loadingFetchUser: false });
     }
@@ -60,6 +70,7 @@ fetchUsers: async () => {
       set((state) => ({
         users: [...state.users, data],
         loadingCreateUser: false,
+        successCreateUser: true
       }));
     } catch (err: Error | unknown) {
       set({ errorCreateUser: (err as Error).message || 'Failed to create user', loadingCreateUser: false });
@@ -73,6 +84,7 @@ fetchUsers: async () => {
       set((state) => ({
         users: state.users.map((u) => (u.id === id ? data : u)),
         loadingUpdateUser: false,
+        successUpdateUser: true
       }));
     } catch (err: Error | unknown) {
       set({ errorUpdateUser: (err as Error).message || 'Failed to update user', loadingUpdateUser: false });
@@ -90,6 +102,7 @@ fetchUsers: async () => {
       set((state) => ({
         users: state.users.filter((u) => u.id !== id),
         loadingDeleteUser: false,
+        successDeleteUser: true
       }));
     } catch (err: Error | unknown) {
       set({ errorDeleteUser: (err as Error).message || 'Failed to delete user', loadingDeleteUser: false });
@@ -100,7 +113,7 @@ fetchUsers: async () => {
         set({ loadingFetchPost: true, errorFetchPost: null });
     try {
       const { data } = await axios.get<Post[]>(BASE_URL + `/users/${userId}/posts`);
-      set({ posts: data, loadingFetchPost: false });
+      set({ posts: data, loadingFetchPost: false, successFetchPost:true });
     } catch (err: Error | unknown) {
       set({ errorFetchPost: (err as Error).message || 'Failed to fetch user`s post', loadingFetchPost: false });
     }
