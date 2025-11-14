@@ -1,16 +1,14 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import {
-  PageLayout,
-  PostList,
-  Button,
-  PostCardSkeleton,
-  Skeleton,
-} from "@/app/components";
+
 import { useUserStore } from "@/store/useUserStore";
 import { Suspense, useEffect } from "react";
 import { Post, User } from "@/types/user";
+import { PageLayout } from "@/app/components/organisms/PageLayout";
+import { PostList } from "@/app/components/organisms/PostList";
+import { Button, Skeleton } from "../components/atoms";
+import { PostCardSkeleton } from "../components/molecules/UserCardSkeleton";
 
 type UserPostParams = {
   posts: Post[];

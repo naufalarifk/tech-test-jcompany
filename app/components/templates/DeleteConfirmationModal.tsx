@@ -12,7 +12,7 @@ interface DeleteConfirmationModalProps {
   onClose: () => void;
 }
 
-export function DeleteConfirmationModal({
+export default function DeleteConfirmationModal({
   isOpen,
   user,
   onClose,

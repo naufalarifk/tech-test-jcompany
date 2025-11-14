@@ -1,6 +1,0 @@
-export * from './Badge'
-export * from './Button'
-export * from './Text'
-export * from './Heading'
-export * from './ThemeToggle'
-export * from './Skeleton'
