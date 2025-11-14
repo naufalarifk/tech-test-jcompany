@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/app/components";
+import { Button } from "./components/atoms/Button";
 
 export default function NotFound() {
   return (

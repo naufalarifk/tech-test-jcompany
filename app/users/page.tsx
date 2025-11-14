@@ -1,18 +1,19 @@
 "use client";
 
-import {
-  PageLayout,
-  StatCard,
-  Button,
-  UserCard,
-  UserCardSkeleton,
-  StatCardSkeleton,
-} from "@/app/components";
 import { useUserStore } from "@/store/useUserStore";
 import { useEffect, useState } from "react";
 import type { User } from "@/types/user";
 import { Toaster } from "react-hot-toast";
 import dynamic from "next/dynamic";
+
+import { PageLayout } from "@/app/components/organisms/PageLayout";
+import { Button } from "@/app/components/atoms/Button";
+import { StatCard } from "@/app/components/molecules/StatCard";
+import { UserCard } from "@/app/components/molecules/UserCard";
+import {
+  UserCardSkeleton,
+  StatCardSkeleton,
+} from "@/app/components/molecules/UserCardSkeleton";
 
 const CreateUserModal = dynamic(
   () => import("@/app/components/templates/CreateUserModal")
@@ -23,7 +24,7 @@ const EditUserModal = dynamic(
 );
 
 const DeleteConfirmationModal = dynamic(
-  () => import("@/app/components/templates/EditUserModal")
+  () => import("@/app/components/templates/DeleteConfirmationModal")
 );
 
 export default function User() {
@@ -50,26 +51,34 @@ export default function User() {
   return (
     <PageLayout title="User Portal">
       <Toaster />
-      <CreateUserModal
-        isOpen={isCreateModalOpen}
-        onClose={() => setIsCreateModalOpen(false)}
-      />
-      <EditUserModal
-        isOpen={isEditModalOpen}
-        user={selectedUser as User}
-        onClose={() => {
-          setIsEditModalOpen(false);
-          setSelectedUser(null);
-        }}
-      />
-      <DeleteConfirmationModal
-        isOpen={isDeleteModalOpen}
-        user={selectedUser}
-        onClose={() => {
-          setIsDeleteModalOpen(false);
-          setSelectedUser(null);
-        }}
-      />
+      {isCreateModalOpen && (
+        <CreateUserModal
+          isOpen={isCreateModalOpen}
+          onClose={() => setIsCreateModalOpen(false)}
+        />
+      )}
+
+      {isEditModalOpen && (
+        <EditUserModal
+          isOpen={isEditModalOpen}
+          user={selectedUser as User}
+          onClose={() => {
+            setIsEditModalOpen(false);
+            setSelectedUser(null);
+          }}
+        />
+      )}
+
+      {isDeleteModalOpen && (
+        <DeleteConfirmationModal
+          isOpen={isDeleteModalOpen}
+          user={selectedUser}
+          onClose={() => {
+            setIsDeleteModalOpen(false);
+            setSelectedUser(null);
+          }}
+        />
+      )}
 
       <section className="mb-8">
         <div className="flex justify-between items-center">

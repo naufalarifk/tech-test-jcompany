@@ -1,6 +1,0 @@
-export * from './Footer'
-export * from './Header'
-export * from './PostCard'
-export * from './StatCard'
-export * from './UserCard'
-export * from './UserCardSkeleton'
