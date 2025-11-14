@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { useUserStore } from "@/store/useUserStore";
 import type { User } from "@/types/user";
 import { Button } from "../atoms/Button";
@@ -28,8 +27,8 @@ export function DeleteConfirmationModal({
   if (!isOpen || !user) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-card rounded-lg shadow-lg border border-primary max-w-md w-full">
+    <div className="modal-backdrop fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="modal-content bg-card rounded-lg shadow-lg border border-primary max-w-md w-full">
         <div className="bg-header border-b border-primary px-6 py-4">
           <h2 className="text-xl font-bold text-primary">Confirm Delete</h2>
         </div>

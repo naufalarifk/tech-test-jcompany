@@ -12,6 +12,7 @@ import {
 import { useUserStore } from "@/store/useUserStore";
 import { useEffect, useState } from "react";
 import type { User } from "@/types/user";
+import { Toaster } from "react-hot-toast";
 
 export default function User() {
   const { users, fetchUsers } = useUserStore();
@@ -36,6 +37,7 @@ export default function User() {
 
   return (
     <PageLayout title="User Portal">
+      <Toaster />
       <CreateUserModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
@@ -106,14 +108,6 @@ export default function User() {
 
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatCard label="Total Users" value={users.length.toString()} />
-        {/* <StatCard
-          label="Active Users"
-          value={users.filter((u) => u.status === "Active").length.toString()}
-        />
-        <StatCard
-          label="Admin Users"
-          value={users.filter((u) => u.role === "Admin").length.toString()}
-        /> */}
       </section>
     </PageLayout>
   );

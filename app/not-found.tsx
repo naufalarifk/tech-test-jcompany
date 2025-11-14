@@ -7,13 +7,11 @@ export default function NotFound() {
   return (
     <main className="min-h-screen bg-primary flex items-center justify-center">
       <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-        {/* 404 Number */}
         <div className="mb-8">
           <h1 className="text-9xl font-bold text-primary mb-4">404</h1>
           <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
         </div>
 
-        {/* Error Message */}
         <div className="bg-card rounded-lg shadow-lg p-8 mb-8 border border-primary">
           <h2 className="text-3xl font-bold text-primary mb-4">
             Page Not Found
@@ -27,7 +25,6 @@ export default function NotFound() {
             the application.
           </p>
 
-          {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/">
               <Button variant="primary">Back to Users</Button>
@@ -35,7 +32,6 @@ export default function NotFound() {
           </div>
         </div>
 
-        {/* Helpful Links */}
         <div className="bg-card rounded-lg shadow p-6 border border-primary">
           <h3 className="text-lg font-semibold text-primary mb-4">
             Quick Links
@@ -54,7 +50,6 @@ export default function NotFound() {
         </div>
       </div>
 
-      {/* Footer */}
       <footer className="fixed bottom-0 left-0 right-0 bg-footer text-white py-4 border-t border-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-tertiary">

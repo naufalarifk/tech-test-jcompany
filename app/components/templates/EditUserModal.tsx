@@ -122,8 +122,8 @@ export function EditUserModal({ isOpen, user, onClose }: EditUserModalProps) {
   if (!isOpen || !user) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-card rounded-lg shadow-lg border border-primary max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="modal-backdrop fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="modal-content bg-card rounded-lg shadow-lg border border-primary max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="sticky top-0 bg-header border-b border-primary px-6 py-4 flex justify-between items-center">
           <h2 className="text-2xl font-bold text-primary">Edit User</h2>
           <button
@@ -143,7 +143,6 @@ export function EditUserModal({ isOpen, user, onClose }: EditUserModalProps) {
             </div>
           )}
 
-          {/* Basic Information */}
           <fieldset className="space-y-4">
             <legend className="text-lg font-semibold text-primary mb-3">
               Basic Information
@@ -235,7 +234,6 @@ export function EditUserModal({ isOpen, user, onClose }: EditUserModalProps) {
             </div>
           </fieldset>
 
-          {/* Address */}
           <fieldset className="space-y-4">
             <legend className="text-lg font-semibold text-primary mb-3">
               Address
@@ -348,7 +346,6 @@ export function EditUserModal({ isOpen, user, onClose }: EditUserModalProps) {
             </div>
           </fieldset>
 
-          {/* Company */}
           <fieldset className="space-y-4">
             <legend className="text-lg font-semibold text-primary mb-3">
               Company Information
@@ -406,7 +403,6 @@ export function EditUserModal({ isOpen, user, onClose }: EditUserModalProps) {
             </div>
           </fieldset>
 
-          {/* Action Buttons */}
           <div className="flex gap-4 justify-end pt-4 border-t border-primary">
             <Button
               variant="secondary"

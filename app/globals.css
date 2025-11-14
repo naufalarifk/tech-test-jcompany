@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
-/* Light Mode (Default) */
 :root {
-  /* Backgrounds */
   --color-bg-primary: #ffffff;
   --color-bg-secondary: #f3f4f6;
   --color-bg-tertiary: #e5e7eb;
@@ -11,17 +9,14 @@
   --color-bg-footer: #000000;
   --color-bg-hover: #f3f4f6;
 
-  /* Text Colors */
   --color-text-primary: #000000;
   --color-text-secondary: #666666;
   --color-text-tertiary: #999999;
   --color-text-inverse: #ffffff;
 
-  /* Borders */
   --color-border-primary: #e5e7eb;
   --color-border-secondary: #d1d5db;
 
-  /* Buttons */
   --color-button-primary-bg: #000000;
   --color-button-primary-hover: #333333;
   --color-button-primary-text: #ffffff;
@@ -31,7 +26,6 @@
   --color-button-danger-text: #666666;
   --color-button-danger-hover: #000000;
 
-  /* Badges */
   --color-badge-default-bg: #e5e7eb;
   --color-badge-default-text: #1a1a1a;
   --color-badge-success-bg: #e5e7eb;
@@ -39,15 +33,12 @@
   --color-badge-inactive-bg: #d1d5db;
   --color-badge-inactive-text: #666666;
 
-  /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 }
 
-/* Dark Mode */
 html.dark {
-  /* Backgrounds */
   --color-bg-primary: #000000;
   --color-bg-secondary: #0a0a0a;
   --color-bg-tertiary: #1a1a1a;
@@ -56,17 +47,14 @@ html.dark {
   --color-bg-footer: #0a0a0a;
   --color-bg-hover: #1a1a1a;
 
-  /* Text Colors */
   --color-text-primary: #ffffff;
   --color-text-secondary: #999999;
   --color-text-tertiary: #666666;
   --color-text-inverse: #000000;
 
-  /* Borders */
   --color-border-primary: #333333;
   --color-border-secondary: #1a1a1a;
 
-  /* Buttons */
   --color-button-primary-bg: #ffffff;
   --color-button-primary-hover: #e5e7eb;
   --color-button-primary-text: #000000;
@@ -76,7 +64,6 @@ html.dark {
   --color-button-danger-text: #999999;
   --color-button-danger-hover: #ffffff;
 
-  /* Badges */
   --color-badge-default-bg: #262626;
   --color-badge-default-text: #e5e7eb;
   --color-badge-success-bg: #262626;
@@ -84,7 +71,6 @@ html.dark {
   --color-badge-inactive-bg: #404040;
   --color-badge-inactive-text: #999999;
 
-  /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
@@ -102,9 +88,7 @@ body {
   color: inherit;
 }
 
-/* Component Utilities using CSS Variables */
 @layer components {
-  /* Backgrounds */
   .bg-primary {
     background-color: var(--color-bg-primary);
   }
@@ -132,7 +116,6 @@ body {
     background-color: var(--color-bg-hover);
   }
 
-  /* Text Colors */
   .text-primary {
     color: var(--color-text-primary);
   }
@@ -145,7 +128,6 @@ body {
     color: var(--color-text-tertiary);
   }
 
-  /* Borders */
   .border-primary {
     border-color: var(--color-border-primary);
   }
@@ -154,12 +136,10 @@ body {
     border-color: var(--color-border-secondary);
   }
 
-  /* Shadows */
   .shadow-card {
     box-shadow: var(--shadow-md);
   }
 
-  /* Buttons - Primary */
   .btn-primary {
     background-color: var(--color-button-primary-bg);
     color: var(--color-button-primary-text);
@@ -173,7 +153,6 @@ body {
     background-color: var(--color-button-primary-hover);
   }
 
-  /* Buttons - Secondary */
   .btn-secondary {
     background-color: var(--color-button-secondary-bg);
     color: var(--color-button-secondary-text);
@@ -187,7 +166,6 @@ body {
     background-color: var(--color-button-secondary-hover);
   }
 
-  /* Buttons - Danger */
   .btn-danger {
     color: var(--color-button-danger-text);
     font-weight: 500;
@@ -198,7 +176,6 @@ body {
     color: var(--color-button-danger-hover);
   }
 
-  /* Badges - Default */
   .badge-default {
     display: inline-flex;
     padding: 0.25rem 0.75rem;
@@ -209,7 +186,6 @@ body {
     color: var(--color-badge-default-text);
   }
 
-  /* Badges - Success */
   .badge-success {
     display: inline-flex;
     padding: 0.25rem 0.75rem;
@@ -220,7 +196,6 @@ body {
     color: var(--color-badge-success-text);
   }
 
-  /* Badges - Inactive */
   .badge-inactive {
     display: inline-flex;
     padding: 0.25rem 0.75rem;
@@ -231,7 +206,6 @@ body {
     color: var(--color-badge-inactive-text);
   }
 
-  /* Links */
   .link-primary {
     color: var(--color-text-primary);
     font-weight: 500;
@@ -242,7 +216,6 @@ body {
     color: var(--color-text-secondary);
   }
 
-  /* Table Styles */
   .table-header {
     background-color: var(--color-bg-secondary);
     border-color: var(--color-border-primary);
@@ -261,4 +234,32 @@ body {
   .table-cell {
     color: var(--color-text-primary);
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-backdrop {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  animation: slideUp 0.3s ease-out;
 }

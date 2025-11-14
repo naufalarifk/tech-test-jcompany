@@ -33,20 +33,6 @@ PostCardProps) {
         <Text variant="tertiary" className="text-sm mb-0">
           Post ID: {id}
         </Text>
-        {/* <div className="flex items-center space-x-4">
-          {onLike && (
-            <button
-              onClick={onLike}
-              className="flex items-center space-x-1 text-primary hover:text-secondary font-medium transition duration-200"
-            >
-            </button>
-          )}
-          {onReadMore && (
-            <button onClick={onReadMore} className="link-primary">
-              Read More
-            </button>
-          )}
-        </div> */}
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { createUserSchema } from "@/schemas/userSchema";
 import type { User } from "@/types/user";
 import { Button } from "../atoms/Button";
 import { Text } from "../atoms/Text";
+import toast from "react-hot-toast";
 
 interface CreateUserModalProps {
   isOpen: boolean;
@@ -79,6 +80,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
     try {
       await createUserSchema.validate(formData, { abortEarly: false });
       await createUser(formData);
+      toast.success("User created successfully!");
       setFormData({
         name: "",
         username: "",
@@ -123,8 +125,8 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-card rounded-lg shadow-lg border border-primary max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="modal-backdrop fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="modal-content bg-card rounded-lg shadow-lg border border-primary max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="sticky top-0 bg-header border-b border-primary px-6 py-4 flex justify-between items-center">
           <h2 className="text-2xl font-bold text-primary">Add New User</h2>
           <button
@@ -144,7 +146,6 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
             </div>
           )}
 
-          {/* Basic Information */}
           <fieldset className="space-y-4">
             <legend className="text-lg font-semibold text-primary mb-3">
               Basic Information
@@ -241,7 +242,6 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
             </div>
           </fieldset>
 
-          {/* Address */}
           <fieldset className="space-y-4">
             <legend className="text-lg font-semibold text-primary mb-3">
               Address
@@ -360,7 +360,6 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
             </div>
           </fieldset>
 
-          {/* Company */}
           <fieldset className="space-y-4">
             <legend className="text-lg font-semibold text-primary mb-3">
               Company Information
@@ -421,7 +420,6 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
             </div>
           </fieldset>
 
-          {/* Action Buttons */}
           <div className="flex gap-4 justify-end pt-4 border-t border-primary">
             <Button
               variant="secondary"
