@@ -55,7 +55,7 @@ export default function Posts() {
     <PageLayout title="Posts">
       {userId && (
         <section className="bg-card rounded-lg shadow-lg p-8 mb-8 border border-primary">
-          {!loadingFetchPost ? (
+          {loadingFetchPost ? (
             <div className="flex items-center justify-between">
               <div>
                 <Skeleton height={36} width={240} className="mb-3" />

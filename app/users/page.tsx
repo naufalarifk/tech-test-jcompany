@@ -46,7 +46,7 @@ export default function User() {
       />
       <EditUserModal
         isOpen={isEditModalOpen}
-        user={selectedUser}
+        user={selectedUser as User}
         onClose={() => {
           setIsEditModalOpen(false);
           setSelectedUser(null);
