@@ -1,4 +1,3 @@
-import React from "react";
 import { Heading } from "../atoms/Heading";
 import { Text } from "../atoms/Text";
 
