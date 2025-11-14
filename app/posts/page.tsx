@@ -44,9 +44,13 @@ function UserPosts(params: UserPostParams) {
     }
   }, [fetchUsers, userId, users, fetchPosts]);
 
-  return loadingFetchPost ? (
-    <UserPostLoading />
-  ) : (
+  const isInitialLoad = !successFetchPost && errorFetchPost === null;
+
+  if (loadingFetchPost || (userId !== null && isInitialLoad)) {
+    return <UserPostLoading />;
+  }
+
+  return (
     <section className="bg-card rounded-lg shadow-lg p-8 mb-8 border border-primary">
       <div className="flex items-center justify-between">
         <div>
