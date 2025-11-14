@@ -16,5 +16,10 @@ export function Button({
     danger: "btn-danger",
   };
 
-  return <button className={`${variants[variant]} ${className}`} {...props} />;
+  return (
+    <button
+      className={`hover:cursor-pointer ${variants[variant]} ${className}`}
+      {...props}
+    />
+  );
 }

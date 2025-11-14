@@ -6,6 +6,7 @@ import { updateUserSchema } from "@/schemas/userSchema";
 import type { User } from "@/types/user";
 import { Button } from "../atoms/Button";
 import { Text } from "../atoms/Text";
+import toast from "react-hot-toast";
 
 interface EditUserModalProps {
   isOpen: boolean;
@@ -100,6 +101,7 @@ export function EditUserModal({ isOpen, user, onClose }: EditUserModalProps) {
     try {
       await updateUserSchema.validate(formData, { abortEarly: false });
       await updateUser(user.id, formData);
+      toast.success("User updated successfully!");
       onClose();
     } catch (err: unknown) {
       const error = err as Record<string, unknown>;
@@ -128,7 +130,7 @@ export function EditUserModal({ isOpen, user, onClose }: EditUserModalProps) {
           <h2 className="text-2xl font-bold text-primary">Edit User</h2>
           <button
             onClick={onClose}
-            className="text-secondary hover:text-primary text-2xl"
+            className="hover:cursor-pointer text-secondary hover:text-primary text-2xl"
           >
             ×
           </button>

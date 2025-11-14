@@ -130,7 +130,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
           <h2 className="text-2xl font-bold text-primary">Add New User</h2>
           <button
             onClick={onClose}
-            className="text-secondary hover:text-primary text-2xl"
+            className="hover:cursor-pointer text-secondary hover:text-primary text-2xl"
           >
             ×
           </button>
