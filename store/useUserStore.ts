@@ -30,9 +30,18 @@ const BASE_URL= 'https://jsonplaceholder.typicode.com'
 
 export const useUserStore = create<UserState>()(
 devtools((set) => ({
-users: [],
-loading: false,
-error : null,
+    users: [],
+    posts: [],
+    loadingFetchUser: false,
+    loadingCreateUser: false,
+    loadingUpdateUser: false,
+    loadingDeleteUser: false,
+    loadingFetchPost: false,
+    errorFetchUser: null,
+    errorCreateUser: null,
+    errorUpdateUser: null,
+    errorDeleteUser: null,
+    errorFetchPost: null,
 
 fetchUsers: async () => {
     set({ loadingFetchUser: true, errorFetchUser: null });
