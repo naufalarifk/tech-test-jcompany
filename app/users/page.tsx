@@ -8,6 +8,8 @@ import {
   CreateUserModal,
   EditUserModal,
   DeleteConfirmationModal,
+  UserCardSkeleton,
+  StatCardSkeleton,
 } from "@/app/components";
 import { useUserStore } from "@/store/useUserStore";
 import { useEffect, useState } from "react";
@@ -15,7 +17,7 @@ import type { User } from "@/types/user";
 import { Toaster } from "react-hot-toast";
 
 export default function User() {
-  const { users, fetchUsers } = useUserStore();
+  const { users, fetchUsers, loadingFetchUser } = useUserStore();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -44,7 +46,7 @@ export default function User() {
       />
       <EditUserModal
         isOpen={isEditModalOpen}
-        user={selectedUser}
+        user={selectedUser as User}
         onClose={() => {
           setIsEditModalOpen(false);
           setSelectedUser(null);
@@ -93,21 +95,35 @@ export default function User() {
               </tr>
             </thead>
             <tbody className="divide-y divide-primary">
-              {users.map((user, id) => (
-                <UserCard
-                  user={user}
-                  key={id}
-                  onEdit={handleEdit}
-                  onDelete={handleDelete}
-                />
-              ))}
+              {loadingFetchUser ? (
+                <>
+                  {[...Array(5)].map((_, index) => (
+                    <UserCardSkeleton key={index} />
+                  ))}
+                </>
+              ) : (
+                users.map((user) => (
+                  <UserCard
+                    user={user}
+                    key={user.id}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                  />
+                ))
+              )}
             </tbody>
           </table>
         </div>
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <StatCard label="Total Users" value={users.length.toString()} />
+        {loadingFetchUser ? (
+          <>
+            <StatCardSkeleton />
+          </>
+        ) : (
+          <StatCard label="Total Users" value={users.length.toString()} />
+        )}
       </section>
     </PageLayout>
   );

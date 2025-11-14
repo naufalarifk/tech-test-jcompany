@@ -62,7 +62,6 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
       return current as Omit<User, "id">;
     });
 
-    // Clear error for this field
     if (errors[path]) {
       setErrors((prev) => {
         const newErrors = { ...prev };
@@ -153,7 +152,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
 
             <div>
               <label className="block text-sm font-medium text-primary mb-1">
-                Name *
+                Name <span className="text-red-600">*</span>
               </label>
               <input
                 type="text"
@@ -171,7 +170,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
 
             <div>
               <label className="block text-sm font-medium text-primary mb-1">
-                Username *
+                Username <span className="text-red-600">*</span>
               </label>
               <input
                 type="text"
@@ -189,7 +188,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
 
             <div>
               <label className="block text-sm font-medium text-primary mb-1">
-                Email *
+                Email <span className="text-red-600">*</span>
               </label>
               <input
                 type="email"
@@ -207,7 +206,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
 
             <div>
               <label className="block text-sm font-medium text-primary mb-1">
-                Phone *
+                Phone <span className="text-red-600">*</span>
               </label>
               <input
                 type="tel"
@@ -225,7 +224,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
 
             <div>
               <label className="block text-sm font-medium text-primary mb-1">
-                Website *
+                Website <span className="text-red-600">*</span>
               </label>
               <input
                 type="url"
@@ -249,7 +248,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
 
             <div>
               <label className="block text-sm font-medium text-primary mb-1">
-                Street *
+                Street <span className="text-red-600">*</span>
               </label>
               <input
                 type="text"
@@ -267,7 +266,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
 
             <div>
               <label className="block text-sm font-medium text-primary mb-1">
-                Suite/Apartment *
+                Suite/Apartment <span className="text-red-600">*</span>
               </label>
               <input
                 type="text"
@@ -286,7 +285,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-primary mb-1">
-                  City *
+                  City <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -304,7 +303,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
 
               <div>
                 <label className="block text-sm font-medium text-primary mb-1">
-                  Zipcode *
+                  Zipcode <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -324,7 +323,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-primary mb-1">
-                  Latitude *
+                  Latitude <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -342,7 +341,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
 
               <div>
                 <label className="block text-sm font-medium text-primary mb-1">
-                  Longitude *
+                  Longitude <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -367,7 +366,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
 
             <div>
               <label className="block text-sm font-medium text-primary mb-1">
-                Company Name *
+                Company Name <span className="text-red-600">*</span>
               </label>
               <input
                 type="text"
@@ -385,7 +384,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
 
             <div>
               <label className="block text-sm font-medium text-primary mb-1">
-                Catch Phrase *
+                Catch Phrase <span className="text-red-600">*</span>
               </label>
               <textarea
                 value={formData.company.catchPhrase}
@@ -403,7 +402,7 @@ export function CreateUserModal({ isOpen, onClose }: CreateUserModalProps) {
 
             <div>
               <label className="block text-sm font-medium text-primary mb-1">
-                Business Segment *
+                Business Segment <span className="text-red-600">*</span>
               </label>
               <textarea
                 value={formData.company.bs}

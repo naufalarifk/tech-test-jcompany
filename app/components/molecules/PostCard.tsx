@@ -9,11 +9,7 @@ interface PostCardProps {
   onReadMore?: () => void;
 }
 
-export function PostCard({
-  post,
-}: // onLike,
-// onReadMore,
-PostCardProps) {
+export function PostCard({ post }: PostCardProps) {
   const { body, id, title, userId } = post;
 
   return (
