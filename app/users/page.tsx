@@ -1,0 +1,114 @@
+"use client";
+
+import {
+  PageLayout,
+  StatCard,
+  Button,
+  UserCard,
+  CreateUserModal,
+  EditUserModal,
+  DeleteConfirmationModal,
+} from "@/app/components";
+import { useUserStore } from "@/store/useUserStore";
+import { useEffect, useState } from "react";
+import type { User } from "@/types/user";
+import { Toaster } from "react-hot-toast";
+
+export default function User() {
+  const { users, fetchUsers } = useUserStore();
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+  const handleEdit = (user: User) => {
+    setSelectedUser(user);
+    setIsEditModalOpen(true);
+  };
+
+  const handleDelete = (user: User) => {
+    setSelectedUser(user);
+    setIsDeleteModalOpen(true);
+  };
+
+  return (
+    <PageLayout title="User Portal">
+      <Toaster />
+      <CreateUserModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+      />
+      <EditUserModal
+        isOpen={isEditModalOpen}
+        user={selectedUser}
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setSelectedUser(null);
+        }}
+      />
+      <DeleteConfirmationModal
+        isOpen={isDeleteModalOpen}
+        user={selectedUser}
+        onClose={() => {
+          setIsDeleteModalOpen(false);
+          setSelectedUser(null);
+        }}
+      />
+
+      <section className="mb-8">
+        <div className="flex justify-between items-center">
+          <div>
+            <h2 className="text-3xl font-bold mb-2">Users</h2>
+            <p className="">Manage and view all users in the system</p>
+          </div>
+          <Button variant="primary" onClick={() => setIsCreateModalOpen(true)}>
+            Add User
+          </Button>
+        </div>
+      </section>
+      <section className="rounded-lg shadow-card overflow-hidden border border-primary  mb-8">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="table-header border-b border-primary">
+              <tr>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-primary">
+                  Name
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-primary">
+                  Email
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-primary">
+                  Address
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-primary">
+                  Company
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-primary">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-primary">
+              {users.map((user, id) => (
+                <UserCard
+                  user={user}
+                  key={id}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <StatCard label="Total Users" value={users.length.toString()} />
+      </section>
+    </PageLayout>
+  );
+}
