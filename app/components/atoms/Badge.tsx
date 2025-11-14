@@ -1,7 +1,6 @@
-import React from "react";
-
+import { ReactNode } from "react";
 interface BadgeProps {
-  children: React.ReactNode;
+  children: ReactNode;
   variant?: "default" | "success" | "inactive";
 }
 

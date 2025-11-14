@@ -1,8 +1,8 @@
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes, ReactNode } from "react";
 
 interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   level: 1 | 2 | 3 | 4 | 5 | 6;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function Heading({

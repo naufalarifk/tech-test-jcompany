@@ -1,8 +1,8 @@
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes, ReactNode } from "react";
 
 interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
   variant?: "primary" | "secondary" | "tertiary";
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function Text({

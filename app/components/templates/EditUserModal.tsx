@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { ChangeEvent, useState, useEffect, FormEvent } from "react";
 import { useUserStore } from "@/store/useUserStore";
 import { updateUserSchema } from "@/schemas/userSchema";
 import type { User } from "@/types/user";
@@ -66,7 +66,7 @@ export default function EditUserModal({
   }, [user, isOpen]);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     path: string
   ) => {
     const { value } = e.target;
@@ -95,7 +95,7 @@ export default function EditUserModal({
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!user) return;
 
