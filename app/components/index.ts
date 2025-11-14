@@ -16,3 +16,9 @@ export { PostCard } from "./molecules/PostCard";
 export { PageLayout } from "./organisms/PageLayout";
 export { GenericTable } from "./organisms/GenericTable";
 export { PostList } from "./organisms/PostList";
+
+// Templates
+export { CreateUserModal } from "./templates/CreateUserModal";
+export { EditUserModal } from "./templates/EditUserModal";
+export { DeleteConfirmationModal } from "./templates/DeleteConfirmationModal";
+

@@ -1,32 +1,71 @@
 "use client";
 
-import Link from "next/link";
 import {
   PageLayout,
   StatCard,
-  Badge,
   Button,
   UserCard,
+  CreateUserModal,
+  EditUserModal,
+  DeleteConfirmationModal,
 } from "@/app/components";
 import { useUserStore } from "@/store/useUserStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import type { User } from "@/types/user";
+
 export default function User() {
-  const { users, loadingFetchUser, fetchUsers, errorFetchUser } =
-    useUserStore();
+  const { users, fetchUsers } = useUserStore();
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
 
+  const handleEdit = (user: User) => {
+    setSelectedUser(user);
+    setIsEditModalOpen(true);
+  };
+
+  const handleDelete = (user: User) => {
+    setSelectedUser(user);
+    setIsDeleteModalOpen(true);
+  };
+
   return (
     <PageLayout title="User Portal">
+      <CreateUserModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+      />
+      <EditUserModal
+        isOpen={isEditModalOpen}
+        user={selectedUser}
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setSelectedUser(null);
+        }}
+      />
+      <DeleteConfirmationModal
+        isOpen={isDeleteModalOpen}
+        user={selectedUser}
+        onClose={() => {
+          setIsDeleteModalOpen(false);
+          setSelectedUser(null);
+        }}
+      />
+
       <section className="mb-8">
         <div className="flex justify-between items-center">
           <div>
             <h2 className="text-3xl font-bold mb-2">Users</h2>
             <p className="">Manage and view all users in the system</p>
           </div>
-          <Button variant="primary">Add User</Button>
+          <Button variant="primary" onClick={() => setIsCreateModalOpen(true)}>
+            Add User
+          </Button>
         </div>
       </section>
       <section className="rounded-lg shadow-card overflow-hidden border border-primary  mb-8">
@@ -53,7 +92,12 @@ export default function User() {
             </thead>
             <tbody className="divide-y divide-primary">
               {users.map((user, id) => (
-                <UserCard user={user} key={id} />
+                <UserCard
+                  user={user}
+                  key={id}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
               ))}
             </tbody>
           </table>

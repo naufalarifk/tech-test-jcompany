@@ -28,6 +28,9 @@ export interface Company {
     bs:          string;
 }
 
+export type CreateUserInput = Omit<User, 'id'>;
+export type UpdateUserInput = Partial<CreateUserInput>;
+
 export interface Post {
     userId: number
     id: number

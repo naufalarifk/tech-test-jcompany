@@ -50,7 +50,7 @@ fetchUsers: async () => {
       const { data } = await axios.post<User>(BASE_URL + '/users', user);
       set((state) => ({
         users: [...state.users, data],
-        loading: false,
+        loadingCreateUser: false,
       }));
     } catch (err: Error | unknown) {
       set({ errorCreateUser: (err as Error).message || 'Failed to create user', loadingCreateUser: false });
@@ -63,7 +63,7 @@ fetchUsers: async () => {
       const { data } = await axios.put<User>(BASE_URL + `/users/${id}`, updates);
       set((state) => ({
         users: state.users.map((u) => (u.id === id ? data : u)),
-        loading: false,
+        loadingUpdateUser: false,
       }));
     } catch (err: Error | unknown) {
       set({ errorUpdateUser: (err as Error).message || 'Failed to update user', loadingUpdateUser: false });
@@ -73,10 +73,14 @@ fetchUsers: async () => {
   deleteUser: async (id) => {
     set({ loadingDeleteUser: true, errorDeleteUser: null });
     try {
-      await axios.delete(`/users/${id}`);
+      await axios.delete(`/users`, {
+        data: {
+          user: id,
+        },
+      });
       set((state) => ({
         users: state.users.filter((u) => u.id !== id),
-        loading: false,
+        loadingDeleteUser: false,
       }));
     } catch (err: Error | unknown) {
       set({ errorDeleteUser: (err as Error).message || 'Failed to delete user', loadingDeleteUser: false });
