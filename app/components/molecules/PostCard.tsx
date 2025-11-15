@@ -8,7 +8,7 @@ interface PostCardProps {
 }
 
 export function PostCard({ post }: PostCardProps) {
-  const { body, id, title, userId } = post;
+  const { body, id, title } = post;
 
   return (
     <div className="bg-card rounded-lg shadow-card p-6 border border-primary border-l-4 border-l-primary hover:shadow-lg transition duration-300">
@@ -16,9 +16,6 @@ export function PostCard({ post }: PostCardProps) {
         <Heading level={3} className="text-xl flex-1 mb-0">
           {title}
         </Heading>
-        <Text variant="tertiary" className="text-sm ml-4 mb-0">
-          {userId}
-        </Text>
       </div>
       <Text variant="secondary" className="mb-4">
         {body}

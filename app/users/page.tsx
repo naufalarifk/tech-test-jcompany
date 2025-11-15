@@ -1,3 +1,4 @@
+// app/users/page.tsx
 "use client";
 
 import { useUserStore } from "@/store/useUserStore";
@@ -16,15 +17,18 @@ import {
 } from "@/app/components/molecules/UserCardSkeleton";
 
 const CreateUserModal = dynamic(
-  () => import("@/app/components/templates/CreateUserModal")
+  () => import("@/app/components/templates/CreateUserModal"),
+  { ssr: false }
 );
 
 const EditUserModal = dynamic(
-  () => import("@/app/components/templates/EditUserModal")
+  () => import("@/app/components/templates/EditUserModal"),
+  { ssr: false }
 );
 
 const DeleteConfirmationModal = dynamic(
-  () => import("@/app/components/templates/DeleteConfirmationModal")
+  () => import("@/app/components/templates/DeleteConfirmationModal"),
+  { ssr: false }
 );
 
 export default function User() {
@@ -50,7 +54,8 @@ export default function User() {
 
   return (
     <PageLayout title="User Portal">
-      <Toaster />
+      <Toaster position="top-right" />
+
       {isCreateModalOpen && (
         <CreateUserModal
           isOpen={isCreateModalOpen}
@@ -80,69 +85,78 @@ export default function User() {
         />
       )}
 
-      <section className="mb-8">
-        <div className="flex justify-between items-center">
+      <section className="mb-6 md:mb-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
-            <h2 className="text-3xl font-bold mb-2">Users</h2>
-            <p className="">Manage and view all users in the system</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">
+              Users
+            </h2>
+            <p className="text-sm md:text-base">
+              Manage and view all users in the system
+            </p>
           </div>
-          <Button variant="primary" onClick={() => setIsCreateModalOpen(true)}>
+          <Button
+            variant="primary"
+            onClick={() => setIsCreateModalOpen(true)}
+            className="w-full sm:w-auto"
+          >
             Add User
           </Button>
         </div>
       </section>
-      <section className="rounded-lg shadow-card overflow-hidden border border-primary  mb-8">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="table-header border-b border-primary">
-              <tr>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-primary">
-                  Name
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-primary">
-                  Email
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-primary">
-                  Address
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-primary">
-                  Company
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-primary">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-primary">
-              {loadingFetchUser ? (
-                <>
-                  {[...Array(5)].map((_, index) => (
-                    <UserCardSkeleton key={index} />
-                  ))}
-                </>
-              ) : (
-                users.map((user) => (
-                  <UserCard
-                    user={user}
-                    key={user.id}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                  />
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
 
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section className="grid grid-cols-1 gap-4 md:gap-6 mb-6 md:mb-8">
         {loadingFetchUser ? (
-          <>
-            <StatCardSkeleton />
-          </>
+          <StatCardSkeleton />
         ) : (
           <StatCard label="Total Users" value={users.length.toString()} />
         )}
+      </section>
+
+      <section className="px-4 rounded-lg shadow-card overflow-hidden border border-primary min-h-[400px] w-full">
+        <div className="overflow-x-auto -mx-4 sm:mx-0">
+          <div className="inline-block min-w-full align-middle">
+            <table className="min-w-full divide-y divide-primary">
+              <thead className="table-header sticky top-0 z-10">
+                <tr>
+                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-semibold text-primary whitespace-nowrap">
+                    Name
+                  </th>
+                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-semibold text-primary whitespace-nowrap">
+                    Email
+                  </th>
+                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-semibold text-primary whitespace-nowrap">
+                    Address
+                  </th>
+                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-semibold text-primary whitespace-nowrap">
+                    Company
+                  </th>
+                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-sm font-semibold text-primary whitespace-nowrap">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-primary">
+                {loadingFetchUser ? (
+                  <>
+                    {[...Array(5)].map((_, index) => (
+                      <UserCardSkeleton key={index} />
+                    ))}
+                  </>
+                ) : (
+                  users.map((user) => (
+                    <UserCard
+                      user={user}
+                      key={user.id}
+                      onEdit={handleEdit}
+                      onDelete={handleDelete}
+                    />
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </section>
     </PageLayout>
   );

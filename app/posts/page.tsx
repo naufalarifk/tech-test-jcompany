@@ -2,7 +2,15 @@
 
 import { useSearchParams } from "next/navigation";
 
-import { useUserStore } from "@/store/useUserStore";
+import {
+  useErrorFetchPosts,
+  useLoadingFetchPosts,
+  usePosts,
+  usePostStore,
+  useSuccessFetchPosts,
+  useUsers,
+  useUserStore,
+} from "@/store/useUserStore";
 import { Suspense, useEffect } from "react";
 import { Post, User } from "@/types/user";
 import { PageLayout } from "@/app/components/organisms/PageLayout";
@@ -106,15 +114,15 @@ function UserPostLoading() {
 }
 
 export default function Posts() {
-  const {
-    users,
-    posts,
-    fetchPosts,
-    loadingFetchPost,
-    errorFetchPost,
-    fetchUsers,
-    successFetchPost,
-  } = useUserStore();
+  const users = useUsers();
+  const posts = usePosts();
+  const loadingFetchPost = useLoadingFetchPosts();
+  const successFetchPost = useSuccessFetchPosts();
+  const errorFetchPost = useErrorFetchPosts();
+
+  const { fetchUsers } = useUserStore();
+  const { fetchPosts } = usePostStore();
+
   return (
     <PageLayout title="Posts">
       <Suspense fallback={<UserPostLoading />}>
