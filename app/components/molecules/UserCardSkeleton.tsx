@@ -2,7 +2,7 @@ import { Skeleton } from "../atoms/Skeleton";
 
 export function UserCardSkeleton() {
   return (
-    <tr className="table-row border-b border-primary">
+    <tr aria-label="Loading" className="table-row border-b border-primary">
       <td className="px-6 py-4">
         <Skeleton width="150px" height="16px" />
       </td>
@@ -26,7 +26,10 @@ export function UserCardSkeleton() {
 
 export function PostCardSkeleton() {
   return (
-    <div className="bg-card rounded-lg shadow-card p-6 border border-primary border-l-4 border-l-primary">
+    <div
+      aria-label="Loading"
+      className="bg-card rounded-lg shadow-card p-6 border border-primary border-l-4 border-l-primary"
+    >
       <div className="flex justify-between items-start mb-2">
         <Skeleton width="70%" height="24px" className="mb-2" />
         <Skeleton width="20px" height="20px" className="ml-4" />
@@ -43,7 +46,10 @@ export function PostCardSkeleton() {
 
 export function StatCardSkeleton() {
   return (
-    <div className="bg-card rounded-lg shadow-card p-6 text-center border border-primary">
+    <div
+      aria-label="Loading"
+      className="bg-card rounded-lg shadow-card p-6 text-center border border-primary"
+    >
       <Skeleton width="80px" height="16px" className="mx-auto mb-2" />
       <Skeleton width="64px" height="36px" className="mx-auto" />
     </div>

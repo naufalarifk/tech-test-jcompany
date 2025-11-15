@@ -80,7 +80,8 @@ html {
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
   font-family: system-ui, -apple-system, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -146,11 +147,15 @@ body {
     font-weight: bold;
     padding: 0.5rem 1.5rem;
     border-radius: 0.5rem;
-    transition: background-color 0.2s ease;
   }
 
-  .btn-primary:hover {
-    background-color: var(--color-button-primary-hover);
+  @media (hover: hover) {
+    .btn-primary {
+      transition: background-color 0.2s ease;
+    }
+    .btn-primary:hover {
+      background-color: var(--color-button-primary-hover);
+    }
   }
 
   .btn-secondary {
@@ -159,21 +164,29 @@ body {
     font-weight: bold;
     padding: 0.5rem 1.5rem;
     border-radius: 0.5rem;
-    transition: background-color 0.2s ease;
   }
 
-  .btn-secondary:hover {
-    background-color: var(--color-button-secondary-hover);
+  @media (hover: hover) {
+    .btn-secondary {
+      transition: background-color 0.2s ease;
+    }
+    .btn-secondary:hover {
+      background-color: var(--color-button-secondary-hover);
+    }
   }
 
   .btn-danger {
     color: var(--color-button-danger-text);
     font-weight: 500;
-    transition: color 0.2s ease;
   }
 
-  .btn-danger:hover {
-    color: var(--color-button-danger-hover);
+  @media (hover: hover) {
+    .btn-danger {
+      transition: color 0.2s ease;
+    }
+    .btn-danger:hover {
+      color: var(--color-button-danger-hover);
+    }
   }
 
   .badge-default {
@@ -209,11 +222,15 @@ body {
   .link-primary {
     color: var(--color-text-primary);
     font-weight: 500;
-    transition: color 0.2s ease;
   }
 
-  .link-primary:hover {
-    color: var(--color-text-secondary);
+  @media (hover: hover) {
+    .link-primary {
+      transition: color 0.2s ease;
+    }
+    .link-primary:hover {
+      color: var(--color-text-secondary);
+    }
   }
 
   .table-header {
@@ -224,11 +241,15 @@ body {
 
   .table-row {
     border-color: var(--color-border-primary);
-    transition: background-color 0.15s ease;
   }
 
-  .table-row:hover {
-    background-color: var(--color-bg-hover);
+  @media (hover: hover) {
+    .table-row {
+      transition: background-color 0.15s ease;
+    }
+    .table-row:hover {
+      background-color: var(--color-bg-hover);
+    }
   }
 
   .table-cell {
@@ -236,62 +257,78 @@ body {
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-.modal-backdrop {
-  animation: fadeIn 0.3s ease-out;
+@media (hover: hover) and (min-width: 768px) {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .modal-backdrop {
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .modal-content {
+    animation: slideUp 0.2s ease-out;
+  }
 }
 
-.modal-content {
-  animation: slideUp 0.3s ease-out;
+@media (max-width: 767px) {
+  .modal-backdrop,
+  .modal-content {
+    animation: none;
+  }
 }
 
 @keyframes shimmer {
   0% {
-    background-position: -1000px 0;
+    background-position: -200% 0;
   }
   100% {
-    background-position: 1000px 0;
+    background-position: 200% 0;
   }
 }
 
 .animate-shimmer {
-  animation: shimmer 2s infinite linear;
+  animation: shimmer 1.5s ease-in-out infinite;
   background: linear-gradient(
-    to right,
+    90deg,
     var(--color-bg-secondary) 0%,
-    var(--color-bg-tertiary) 20%,
-    var(--color-bg-secondary) 40%,
+    var(--color-bg-tertiary) 50%,
     var(--color-bg-secondary) 100%
   );
-  background-size: 1000px 100%;
+  background-size: 200% 100%;
+  will-change: background-position;
 }
 
-html.dark .animate-shimmer {
-  background: linear-gradient(
-    to right,
-    #1a1a1a 0%,
-    #262626 20%,
-    #1a1a1a 40%,
-    #1a1a1a 100%
-  );
-  background-size: 1000px 100%;
+@media (prefers-reduced-motion: reduce) {
+  .animate-shimmer {
+    animation: none;
+    background: var(--color-bg-secondary);
+  }
 }

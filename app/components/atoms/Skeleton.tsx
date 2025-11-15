@@ -36,6 +36,7 @@ export function Skeleton({
 
   return (
     <div
+      aria-label="Loading"
       className={`bg-gray-300 dark:bg-neutral-700 ${variantClasses[variant]} ${animationClasses[animation]} ${className}`}
       style={style}
     />
